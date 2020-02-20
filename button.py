@@ -8,11 +8,9 @@ class ButtonFunction:
     def __call__(self, *args):
         func = self.func_generator(*args)
         def wrapped(x):
-            try:
-                x = int(x) if isinstance(x, float) and x.is_integer() else x
-                return func(x)
-            except:
-                pass # E.g. if we perform "<<" on 1.2, it won't work
+            x = int(x) if isinstance(x, float) and x.is_integer() else x
+            try: return func(x)
+            except: return x # use identical function if the function raise exception
         return wrapped
 
     def __get__(self, instance, instancetype):
