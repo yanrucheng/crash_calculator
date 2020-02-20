@@ -17,6 +17,7 @@ class CrashCalculator:
             if steps <= 0: continue
             for b in self.buttons:
                 new_reg = b.func(reg)
+                if new_reg is None: continue
                 if new_reg == self.target:
                     return actions + [b.name]
                 if new_reg in met: continue
@@ -36,9 +37,18 @@ class Button:
 
     def _parse(self, name):
         if name[0] in self.ops:
-            return lambda x: self.ops[name[0]](x, int(name[1:]))
+            return self._wrap(lambda x: self.ops[name[0]](x, int(name[1:])))
         else:
-            return lambda x: int(str(x) + name)
+            return self._wrap(lambda x: int(str(x) + name))
+
+    def _wrap(self, func):
+        def wrapped(x):
+            try:
+                if isinstance(x, float) and x.is_integer():
+                    x = int(x)
+                return func(x)
+            except: pass
+        return wrapped
 
 def get_args():
     parser = argparse.ArgumentParser(description='Crash Calculator: the Game')
