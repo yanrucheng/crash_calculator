@@ -18,7 +18,6 @@ class CrashCalculator:
             if steps <= 0: continue
             for b in self.buttons:
                 new_reg = b.func(reg)
-                if new_reg is None: continue
                 if new_reg == self.target:
                     return actions + [b.name]
                 if new_reg in met: continue
@@ -31,7 +30,7 @@ def get_args():
     parser.add_argument('-moves', type=int, help='Moves allowed to use')
     parser.add_argument('-target', type=int, help='Target number')
     parser.add_argument('-register', type=int, help='Original number in the register')
-    parser.add_argument("-buttons", nargs="*", type=str, help='Buttons available')
+    parser.add_argument("-buttons", nargs="*", type=str, help="Buttons available, E.g. +1 | *2 | 1 | \"<<\"")
     return parser.parse_args()
 
 if __name__ == '__main__':
