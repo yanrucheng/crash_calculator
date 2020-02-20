@@ -1,5 +1,6 @@
 import argparse
-from operator import mul, add, truediv, sub
+from button import Button
+
 class CrashCalculator:
     def __init__(self, args):
         self.register = args.register
@@ -24,31 +25,6 @@ class CrashCalculator:
                 met.add(new_reg)
                 dp.append((new_reg, steps - 1, actions + [b.name]))
         return ['Fail']
-
-class Button:
-    d = { '<<': lambda x: x // 10 }
-    ops = {'+': add, '-': sub, '/': truediv, '*': mul}
-    def __init__(self, name):
-        self.name = name
-        if name in self.d:
-            self.func = self.d[name]
-        else:
-            self.func = self._parse(name)
-
-    def _parse(self, name):
-        if name[0] in self.ops:
-            return self._wrap(lambda x: self.ops[name[0]](x, int(name[1:])))
-        else:
-            return self._wrap(lambda x: int(str(x) + name))
-
-    def _wrap(self, func):
-        def wrapped(x):
-            try:
-                if isinstance(x, float) and x.is_integer():
-                    x = int(x)
-                return func(x)
-            except: pass
-        return wrapped
 
 def get_args():
     parser = argparse.ArgumentParser(description='Crash Calculator: the Game')
