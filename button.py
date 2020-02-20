@@ -19,7 +19,12 @@ class ButtonFunction:
         return functools.partial(self.__call__, instance)
 
 class Button:
-    d = {'<<': lambda x: x // 10 }
+    d = {
+        '<<': lambda x: int(str(x)[:-1]),
+        'x^2': lambda x: x**2,
+        '+/-': lambda x: -x,
+        'reverse': lambda x:int(str(x)[::-1])
+    }
     ops = {'+': add, '-': sub, '/': truediv, '*': mul}
     def __init__(self, name):
         self.name = name

@@ -30,7 +30,7 @@ def get_args():
     parser.add_argument('-moves', type=int, help='Moves allowed to use')
     parser.add_argument('-target', type=int, help='Target number')
     parser.add_argument('-register', type=int, help='Original number in the register')
-    parser.add_argument("-buttons", nargs="*", type=str, help="Buttons available, E.g. +1 | *2 | 1 | \"<<\"")
+    parser.add_argument("-buttons", nargs="*", type=str, help="Buttons available, E.g. +1 | *2 | 1 | \"<<\" | \"6=>9\"")
     return parser.parse_args()
 
 if __name__ == '__main__':
