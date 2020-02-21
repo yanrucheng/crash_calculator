@@ -1,6 +1,9 @@
 import argparse
 from button import Button
-from gooey import Gooey
+try:
+    from gooey import Gooey
+except:
+    Gooey = lambda x:x # dummy Gooey wrapper
 
 class CrashCalculator:
     def __init__(self, register, moves, target, buttons):
