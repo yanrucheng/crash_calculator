@@ -28,10 +28,15 @@ class CrashCalculator:
 
 def get_args():
     parser = argparse.ArgumentParser(description='Crash Calculator: the Game')
-    parser.add_argument('-moves', type=int, help='Moves allowed to use')
-    parser.add_argument('-target', type=int, help='Target number')
-    parser.add_argument('-register', type=int, help='Original number in the register')
-    parser.add_argument("-buttons", nargs="*", type=str, help="Buttons available, E.g. +1 | *2 | 1 | \"<<\" | \"6=>9\"")
+    requiredNamed = parser.add_argument_group('required named arguments')
+    requiredNamed.add_argument('-m', '--moves', type=int, required=True,
+            help='The moves allowed to use')
+    requiredNamed.add_argument('-t', '--target', type=int, required=True,
+            help='The target number')
+    requiredNamed.add_argument('-r', '--register', type=int, required=True,
+            help='The original number in the register')
+    requiredNamed.add_argument('-b', '--buttons', nargs="*", type=str, required=True,
+            help="Buttons available, E.g. +1 | *2 | 1 | \"<<\" | \"6=>9\"")
     return parser.parse_args()
 
 if __name__ == '__main__':
