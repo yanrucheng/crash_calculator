@@ -1,5 +1,6 @@
 import functools
 from operator import mul, add, truediv, sub
+import math
 
 class ButtonFunction:
     def __init__(self, func_generator):
@@ -23,7 +24,7 @@ class Button:
         '<<': lambda x: int(str(x)[:-1]),
         'x^2': lambda x: x**2,
         '+/-': lambda x: -x,
-        'reverse': lambda x:int(str(x)[::-1])
+        'reverse': lambda x:math.copysign(1, x) * int(str(abs(x))[::-1])
     }
     ops = {'+': add, '-': sub, '/': truediv, '*': mul}
     def __init__(self, name):
