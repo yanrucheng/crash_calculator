@@ -33,8 +33,8 @@ def get_args():
     requiredNamed = parser.add_argument_group('required named arguments')
     requiredNamed.add_argument('-m', '--moves', type=int, required=True,
             help='The moves allowed to use')
-    requiredNamed.add_argument('-t', '--target', type=int, required=True,
-            help='The target number')
+    requiredNamed.add_argument('-t', '--target', nargs="*", type=int, required=True,
+            help='The target number(s)')
     requiredNamed.add_argument('-r', '--register', type=int, required=True,
             help='The original number in the register')
     requiredNamed.add_argument('-b', '--buttons', nargs="*", type=str, required=True,
@@ -43,7 +43,8 @@ def get_args():
 
 if __name__ == '__main__':
     args = get_args()
-    register, moves, target = args.register, args.moves, args.target
+    register, moves, targets = args.register, args.moves, args.target
     buttons = [Button(name) for name in args.buttons]
-    cc = CrashCalculator(register, moves, target, buttons)
-    print(cc.solve())
+    for t in targets:
+        cc = CrashCalculator(register, moves, t, buttons)
+        print('Solution for target: {},'.format(t), cc.solve())
