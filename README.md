@@ -1,5 +1,6 @@
-# crash_calculator
-Crash mobile game - `Calculator: The Game` and `Calculator 2: The Game`
+# Cracking `Calculator: The Game`
+**Crash** the mobile game - ~~**Calculator: The Game**~~ and ~~**Calculator 2: The Game**~~
+![Calculator: The Game](https://www.appunwrapper.com/wp-content/uploads/2017/07/image-312-1.jpg)
 
 # Installation
 - `$ conda install -c conda-forge gooey`
