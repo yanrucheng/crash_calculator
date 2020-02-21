@@ -24,7 +24,8 @@ class Button:
         '<<': lambda x: int(str(x)[:-1]),
         'x^2': lambda x: x**2,
         '+/-': lambda x: -x,
-        'reverse': lambda x:math.copysign(1, x) * int(str(abs(x))[::-1])
+        'reverse': lambda x:math.copysign(1, x) * int(str(abs(x))[::-1]),
+        'sum': lambda x:math.copysign(1, x) * sum(map(int, str(abs(x)))),
     }
     ops = {'+': add, '-': sub, '/': truediv, '*': mul}
     def __init__(self, name):
