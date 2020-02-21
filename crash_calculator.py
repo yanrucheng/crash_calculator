@@ -1,5 +1,6 @@
 import argparse
 from button import Button
+from gooey import Gooey
 
 class CrashCalculator:
     def __init__(self, register, moves, target, buttons):
@@ -26,6 +27,7 @@ class CrashCalculator:
                 dp.append((new_reg, actions + [b.name]))
         return ['Fail']
 
+@Gooey
 def get_args():
     parser = argparse.ArgumentParser(description='Crash Calculator: the Game')
     requiredNamed = parser.add_argument_group('required named arguments')
