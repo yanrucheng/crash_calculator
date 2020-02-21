@@ -1,4 +1,4 @@
-import argparse
+import argparse, warnings
 from button import Button
 try:
     from gooey import Gooey
@@ -33,6 +33,8 @@ class CrashCalculator:
 @Gooey
 def get_args():
     parser = argparse.ArgumentParser(description='Crash Calculator: the Game')
+    parser.add_argument('-d', '--debug', action='store_true',
+            help='Show warnings from buttons')
     requiredNamed = parser.add_argument_group('required named arguments')
     requiredNamed.add_argument('-m', '--moves', type=int, required=True,
             help='The moves allowed to use')
@@ -46,8 +48,10 @@ def get_args():
 
 if __name__ == '__main__':
     args = get_args()
+    not args.debug and warnings.filterwarnings("ignore")
+
     register, moves, targets = args.register, args.moves, args.target
     buttons = [Button(name) for name in args.buttons]
     for t in targets:
         cc = CrashCalculator(register, moves, t, buttons)
-        print('Solution for target: {},'.format(t), cc.solve())
+        print('Solution for target {}: {}.'.format(t, ', '.join(cc.solve())))
