@@ -1,4 +1,4 @@
-import functools
+import functools, warnings
 from operator import mul, add, truediv, sub
 import math
 
@@ -10,8 +10,11 @@ class ButtonFunction:
         func = self.func_generator(*args)
         def wrapped(x):
             x = int(x) if isinstance(x, float) and x.is_integer() else x
-            try: return func(x)
-            except: return x # use identical function if the function raise exception
+            try:
+                return func(x)
+            except:
+                warnings.warn('Function: {} cannot be applied on value: {}'.format(args[-1], x))
+                return x # use identical function if the function raise exception
         return wrapped
 
     def __get__(self, instance, instancetype):
