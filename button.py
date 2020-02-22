@@ -26,11 +26,17 @@ class Button:
     d = {
         '<<': lambda x: int(str(x)[:-1]),
         'x^2': lambda x: x**2,
+        'x^3': lambda x: x**3,
         '+/-': lambda x: -x,
-        'reverse': lambda x:math.copysign(1, x) * int(str(abs(x))[::-1]),
-        'sum': lambda x:math.copysign(1, x) * sum(map(int, str(abs(x)))),
+        'reverse': lambda x: math.copysign(1, x) * int(str(abs(x))[::-1]),
+        'sum': lambda x: math.copysign(1, x) * sum(map(int, str(abs(x)))),
+        'shift<': lambda x: int(str(x)[1:] + str(x)[0]),
+        'shift>': lambda x: int(str(x)[-1] + str(x)[:-1]),
+        'mirror': lambda x: int(str(x) + str(x)[::-1]),
+        'inv10': lambda x: int(''.join(map(lambda x:str(10-int(x))[-1], str(x)))), # inv10(105) = 905
     }
     ops = {'+': add, '-': sub, '/': truediv, '*': mul}
+
     def __init__(self, name):
         self.name = name
         self.func = self._parse(name)
@@ -45,4 +51,3 @@ class Button:
             return lambda x: int(str(x).replace(*name.split('=>')))
         else:
             return lambda x: int(str(x) + name)
-
