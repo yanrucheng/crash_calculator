@@ -52,12 +52,13 @@ class Button:
     def func(self):
         return self._get_func()
 
-    def add(self, value):
-        if self.type == 'digit':
-            return Button(str(int(self.name) + value))
-        elif self.type == 'operator':
-            return Button(self.name[0] + str(int(self.name[1:]) + value))
-        return self
+    def add(self, button):
+        v = int(self.name[3:])
+        if button.type == 'digit':
+            return Button(str(int(button.name) + v))
+        elif button.type == 'operator':
+            return Button(button.name[0] + str(int(button.name[1:]) + v))
+        return button
 
     def store(self, value):
         assert self.type == 'store'
@@ -84,8 +85,6 @@ class Button:
         if self.type == 'transform':  return lambda x: int(str(x).replace(*self.name.split('=>')))
         if self.type == 'operator':  return lambda x: self.ops[self.name[0]](x, int(self.name[1:]))
         if self.type == 'store':     return lambda x: int(str(x) + self.name[5:])
-        if self.type == 'button_modifier':
-            self.num = int(self.name[3:])
 
 
 
